@@ -21,6 +21,7 @@ Then issue the script using
 node moviequotes.js
 ```
 The script writes the resulting JSON file into `output.json` into the current directory.
+To make use of the backrop images, check http://docs.themoviedb.apiary.io/#reference/configuration/configuration/get
 
 ### Demo of `output.json`
 ```json
