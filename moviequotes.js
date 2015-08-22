@@ -29,7 +29,7 @@ var config = {
   // themoviedb API key
   api_key: '',
   // themoviedb allowes 30 requests per 10sec. Increase if you get HTTP423 errors
-  delay: 0 //ms
+  delay: 100 //ms
 };
 
 var gunzip = zlib.createGunzip();
@@ -91,8 +91,8 @@ ratings.on('end', function(){
             title: item.title,
             quotes: item.quotes,
             backdrop_path: backdrop
-          }, config.delay);
-        });
+          });
+        }, config.delay);
       });
     }, function(err, result){
       result = result.filter(function(movie){
@@ -135,7 +135,7 @@ var getBackground = function(title, fn){
         fn(body.results[0].backdrop_path)
       }
       else {
-        console.log(colors.inverse('\'' + title + '\' not found at themoviedb.'));
+        console.log(colors.inverse('\'' + title + '\' not found at TMDb'));
         fn('');
       }
     });
