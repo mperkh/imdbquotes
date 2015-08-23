@@ -32,6 +32,11 @@ var config = {
   delay: 100 //ms
 };
 
+if (config.api_key.length === 0) {
+  console.log('No TMDb api key specified.');
+  process.exit();
+}
+
 var gunzip = zlib.createGunzip();
 var ratings = fs
   .createReadStream('ratings.list.gz', {flags: 'r'})
@@ -85,12 +90,13 @@ ratings.on('end', function(){
 
   quotes.on('end', function(){
     async.mapSeries(result, function(item, callback){
-      getBackground(item.title, function(backdrop){
+      getImages(item.title, function(images){
         setTimeout(function() {
           callback(null, {
             title: item.title,
             quotes: item.quotes,
-            backdrop_path: backdrop
+            backdrop_path: images.backdrop_path,
+            poster_path: images.poster_path
           });
         }, config.delay);
       });
@@ -116,13 +122,13 @@ ratings.on('end', function(){
   });
 });
 
-var getBackground = function(title, fn){
+var getImages = function(title, fn){
   title = title.match(/^(.+)\s\(\d{4}.*/)[1];
   console.log('Processing: ' + title);
   var backdrops = [];
     request({
     method: 'GET',
-    url: 'http://api.themoviedb.org/3/search/movie?query=' + 
+    url: 'https://api.themoviedb.org/3/search/movie?query=' + 
       title + '&api_key=' + config.api_key,
     headers: {
     'Accept': 'application/json'
@@ -132,7 +138,10 @@ var getBackground = function(title, fn){
       };
       body = JSON.parse(body);
       if (body.results.length > 0) {
-        fn(body.results[0].backdrop_path)
+        fn({
+          backdrop_path: body.results[0].backdrop_path,
+          poster_path: body.results[0].poster_path
+        })
       }
       else {
         console.log(colors.inverse('\'' + title + '\' not found at TMDb'));
