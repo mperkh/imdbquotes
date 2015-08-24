@@ -12,6 +12,7 @@ var split = require('split');
 var request = require('request');
 var async = require('async');
 var colors = require('colors/safe');
+var tmdb = require('moviedb')('');
 var counter = 0;
 var movies = [];
 var result = [];
@@ -26,16 +27,9 @@ var config = {
   maxnoquotes: 10,
   // Row in ratings.list.gz, where top250 movie list begins
   startline: 27,
-  // themoviedb API key
-  api_key: '',
   // themoviedb allowes 30 requests per 10sec. Increase if you get HTTP423 errors
   delay: 100 //ms
 };
-
-if (config.api_key.length === 0) {
-  console.log('No TMDb api key specified.');
-  process.exit();
-}
 
 var gunzip = zlib.createGunzip();
 var ratings = fs
@@ -123,29 +117,23 @@ ratings.on('end', function(){
 });
 
 var getImages = function(title, fn){
-  title = title.match(/^(.+)\s\(\d{4}.*/)[1];
-  console.log('Processing: ' + title);
+  title = title.match(/^(.+)\s\((\d{4}).*/);
+  console.log('Processing: ' + title[1] + ', ' + title[2]);
   var backdrops = [];
-    request({
-    method: 'GET',
-    url: 'https://api.themoviedb.org/3/search/movie?query=' + 
-      title + '&api_key=' + config.api_key,
-    headers: {
-    'Accept': 'application/json'
-    }}, function (error, response, body) {
-      if (response.statusCode === 429) {
-        console.log('HTTP Response Error 429');
-      };
-      body = JSON.parse(body);
-      if (body.results.length > 0) {
-        fn({
-          backdrop_path: body.results[0].backdrop_path,
-          poster_path: body.results[0].poster_path
-        })
-      }
-      else {
-        console.log(colors.inverse('\'' + title + '\' not found at TMDb'));
-        fn('');
-      }
-    });
+  tmdb.searchMovie({query: title[1], year: title[2]}, function(err, res){
+    if (err) {
+      console.log(err);
+      fn('');
+    }
+    else if (res.results.length > 0) {
+      fn({
+        backdrop_path: res.results[0].backdrop_path,
+        poster_path: res.results[0].poster_path
+      })
+    }
+    else {
+      console.log(colors.inverse('\'' + title + '\' not found at TMDb'));
+      fn('');
+    }
+  });
 }
