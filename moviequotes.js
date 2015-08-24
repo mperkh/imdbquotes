@@ -23,7 +23,6 @@ var fs = require('fs');
 var zlib = require('zlib');
 var iconv = require('iconv-lite');
 var split = require('split');
-var request = require('request');
 var async = require('async');
 var colors = require('colors/safe');
 var tmdb = require('moviedb')(argv.a);
