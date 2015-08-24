@@ -4,6 +4,20 @@ ftp://ftp.funet.fi/pub/mirrors/ftp.imdb.com/pub/ratings.list.gz
 ftp://ftp.funet.fi/pub/mirrors/ftp.imdb.com/pub/quotes.list.gz
 */
 
+var argv = require('minimist')(process.argv.slice(2), {
+  default:{n: 250, m: 100, q: 10, l: 27, d: 100}
+});
+
+if (argv.n > 250) {
+  console.log('Movie count can be max 250.');
+  process.exit();
+}
+
+if (!argv.a) {
+  console.log('TMDb api key has to be specified (option \'-a\').');
+  process.exit();
+}
+
 
 var fs = require('fs');
 var zlib = require('zlib');
@@ -12,7 +26,7 @@ var split = require('split');
 var request = require('request');
 var async = require('async');
 var colors = require('colors/safe');
-var tmdb = require('moviedb')('');
+var tmdb = require('moviedb')(argv.a);
 var counter = 0;
 var movies = [];
 var result = [];
@@ -20,15 +34,15 @@ var result = [];
 // Configuration
 var config = {
   // Number of movies to process, max. 250
-  n_movies: 250,
+  n_movies: argv.n,
   // Maximum string length of movie quote
-  maxquotelength: 100,
+  maxquotelength: argv.m,
   // Maximum number of quotes per movie
-  maxnoquotes: 10,
+  maxnoquotes: argv.q,
   // Row in ratings.list.gz, where top250 movie list begins
-  startline: 27,
+  startline: argv.l,
   // themoviedb allowes 30 requests per 10sec. Increase if you get HTTP423 errors
-  delay: 100 //ms
+  delay: argv.d //ms
 };
 
 var gunzip = zlib.createGunzip();

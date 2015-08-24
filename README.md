@@ -12,16 +12,23 @@ The following two files need to be in the same directory
 ```
 ftp://ftp.funet.fi/pub/mirrors/ftp.imdb.com/pub/ratings.list.gz
 ftp://ftp.funet.fi/pub/mirrors/ftp.imdb.com/pub/quotes.list.gz
-````
-### TMDb API Key
-Can be obtained from https://www.themoviedb.org/documentation/api - enter key into the config section of `moviequotes.js`.
-
-Then issue the script using
-````
-node moviequotes.js
 ```
+### TMDb API Key
+Can be obtained from https://www.themoviedb.org/documentation/api
+
+Then issue the script using:
+
+```
+node moviequotes.js -a apikey [-n] [-m] [-q] [-l] [-d]
+  -a API key for TMDb, required
+  -n num Number of movies to process, max. 250, default: 250
+  -m num Maximum string length of movie quote, default: 100
+  -q num Maximum number of quotes per movie, default: 10
+  -l num Row in ratings.list.gz, where top250 movie list begins, default: 27
+  -d num dely in ms for access to themoviedb api, default: 100
+```
+
 The script writes the resulting JSON file into `output.json` into the current directory.
-To make use of the backrop images, check http://docs.themoviedb.apiary.io/#reference/configuration/configuration/get
 
 ### Demo of `output.json`
 ```json
@@ -32,7 +39,8 @@ To make use of the backrop images, check http://docs.themoviedb.apiary.io/#refer
       "Juror #3: [recurring line] You *what?*\nJuror #5, Juror #7: You heard me.",
       "Juror #6: You think he's not guilty, huh?\nJuror #8: I don't know. It's *possible*."
     ],
-    "backdrop_path": "/lH2Ga8OzjU1XlxJ73shOlPx6cRw.jpg"
+    "backdrop_path": "/lH2Ga8OzjU1XlxJ73shOlPx6cRw.jpg",
+    "poster_path": "/d4KNaTrltq6bpkFS01pYtyXa09m.jpg"
   },
   {
     "title": "12 Years a Slave (2013)",
@@ -42,7 +50,8 @@ To make use of the backrop images, check http://docs.themoviedb.apiary.io/#refer
       "Tibeats: I thought I told yah ta commence ta puttin' on clapboards this morn'.",
       "[first lines]\nOverseer: Alright now, y'all fresh niggers. Y'all gonna be in the cuttin' gang."
     ],
-    "backdrop_path": "/xnRPoFI7wzOYviw3PmoG94X2Lnc.jpg"
+    "backdrop_path": "/xnRPoFI7wzOYviw3PmoG94X2Lnc.jpg",
+    "poster_path": "/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg"
   },
   {
     "title": "2001: A Space Odyssey (1968)",
@@ -57,7 +66,8 @@ To make use of the backrop images, check http://docs.themoviedb.apiary.io/#refer
       "Dr. Floyd: [upon learning about the monolith while on the moonbus] Deliberately buried. Huh!",
       "HAL: I've just picked up a fault in the AE35 unit. It's going to go 100% failure in 72 hours."
     ],
-    "backdrop_path": "/pckdZ29bHj11hBsV3SbVVfmCB6C.jpg"
+    "backdrop_path": "/pckdZ29bHj11hBsV3SbVVfmCB6C.jpg",
+    "poster_path": "/tHbMIIF51rguMNSastqoQwR0sBs.jpg"
   }
 ]
 ```
