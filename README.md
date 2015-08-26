@@ -33,41 +33,31 @@ The script writes the resulting JSON file into `output.json` into the current di
 ### Demo of `output.json`
 ```json
 [
-  {
-    "title": "12 Angry Men (1957)",
+    {
+    "title": "The Dark Knight (2008)",
+    "tmdbid": 155,
+    "backdrop_path": "/nnMC0BM6XbjIIrT4miYmMtPGcQV.jpg",
+    "poster_path": "/1hRoyzDtpgMU7Dz4JF22RANzQO7.jpg",
     "quotes": [
-      "Juror #3: [recurring line] You *what?*\nJuror #5, Juror #7: You heard me.",
-      "Juror #6: You think he's not guilty, huh?\nJuror #8: I don't know. It's *possible*."
-    ],
-    "backdrop_path": "/lH2Ga8OzjU1XlxJ73shOlPx6cRw.jpg",
-    "poster_path": "/d4KNaTrltq6bpkFS01pYtyXa09m.jpg"
+      "The Joker: We made it!",
+      "Cop Heckler: No more dead cops!",
+      "Two-Face: IT'S ABOUT WHAT'S FAIR.",
+      "The Joker: And... here... we... go!",
+      "The Joker: You'll see. I'll show you.",
+      "[repeated line]\nThe Joker: Why so serious?"
+    ]
   },
   {
-    "title": "12 Years a Slave (2013)",
+    "title": "The Godfather (1972)",
+    "tmdbid": 238,
+    "backdrop_path": "/6xKCYgH16UuwEGAyroLU6p8HLIn.jpg",
+    "poster_path": "/d4KNaTrltq6bpkFS01pYtyXa09m.jpg",
     "quotes": [
-      "Solomon Northup: I don't want to survive. I want to live.",
-      "Freeman: Put the least thought in your head. C'mon, now. Think of somethin'.",
-      "Tibeats: I thought I told yah ta commence ta puttin' on clapboards this morn'.",
-      "[first lines]\nOverseer: Alright now, y'all fresh niggers. Y'all gonna be in the cuttin' gang."
-    ],
-    "backdrop_path": "/xnRPoFI7wzOYviw3PmoG94X2Lnc.jpg",
-    "poster_path": "/9O7gLzmreU0nGkIB6K3BsJbzvNv.jpg"
+      "Sonny: Goddamn FBI don't respect nothin'.",
+      "Clemenza: Paulie, pull over, I gotta take a leak.",
+      "Calo: In Sicily, women are more dangerous than shotguns.",
+      "Sonny: How's Paulie?\nClemenza: Oh, Paulie... won't see him no more."
+    ]
   },
-  {
-    "title": "2001: A Space Odyssey (1968)",
-    "quotes": [
-      "Poole's Father: See you next Wednesday.",
-      "HAL: Just what do you think you're doing, Dave?",
-      "Dr. Floyd: You guys have really come up with somethin'.",
-      "Dr. Floyd: I'm sorry, I'm simply not at liberty to say.",
-      "[first lines]\nAries-1B stewardess: Here you are, sir, main level please.",
-      "Stewardess: Thank you. You are cleared through Voiceprint Identification.",
-      "HAL: Dave, stop. Stop, will you? Stop, Dave. Will you stop Dave? Stop, Dave.",
-      "Dr. Floyd: [upon learning about the monolith while on the moonbus] Deliberately buried. Huh!",
-      "HAL: I've just picked up a fault in the AE35 unit. It's going to go 100% failure in 72 hours."
-    ],
-    "backdrop_path": "/pckdZ29bHj11hBsV3SbVVfmCB6C.jpg",
-    "poster_path": "/tHbMIIF51rguMNSastqoQwR0sBs.jpg"
-  }
 ]
 ```

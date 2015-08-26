@@ -97,13 +97,14 @@ ratings.on('end', function(){
 
   quotes.on('end', function(){
     async.mapSeries(result, function(item, callback){
-      getImages(item.title, function(images){
+      getImages(item.title, function(tmdbdata){
         setTimeout(function() {
           callback(null, {
             title: item.title,
+            tmdbid: tmdbdata.id,
+            backdrop_path: tmdbdata.backdrop_path,
+            poster_path: tmdbdata.poster_path,
             quotes: item.quotes,
-            backdrop_path: images.backdrop_path,
-            poster_path: images.poster_path
           });
         }, config.delay);
       });
@@ -140,6 +141,7 @@ var getImages = function(title, fn){
     }
     else if (res.results.length > 0) {
       fn({
+        id: res.results[0].id,
         backdrop_path: res.results[0].backdrop_path,
         poster_path: res.results[0].poster_path
       })
