@@ -1,5 +1,6 @@
+![Screenshot of final app](screenshot.jpg?raw=true "Screenshot")
 # IMDb and TMDb quotes and movie backdrop parser
-Parse IMDb and TMDb data to generate a collection of movie quotes with backdrop images. Basis for my contribution to Freecodecamp's [Random Quote Machine Zipline](http://www.freecodecamp.com/challenges/zipline-build-a-random-quote-machine).
+Parse IMDb and TMDb data to generate a collection of movie quotes with backdrop images. Basis for [my contribution](http://codepen.io/mperkh/full/pJmJOM) to Freecodecamp's [Random Quote Machine Zipline](http://www.freecodecamp.com/challenges/zipline-build-a-random-quote-machine).
 
 To run, first issue
 ````
