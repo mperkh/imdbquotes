@@ -71,27 +71,31 @@ ratings.on('end', function(){
     .pipe(split('# '));
 
   quotes.on('data', function(chunk){
+    var quotes = {};
     var search = chunk.match(/(^.+\s\(\d{4}.*)/);
     if (search && movies.indexOf(search[1]) !== -1) {
-      result.push({
-        title: chunk.split('\n', 1)[0],
-        quotes: chunk.replace(/.+(\n){1}/, '')
-          .trim()
-          .split('\n\n')
-          .filter(function(quote){
-            return quote.length < config.maxquotelength;
-          })
-          .sort(function (a, b) {
-            if (a.length > b.length) return 1;
-            if (a.length < b.length) return -1;
-            return 0;
-          })
-          .slice(0, config.maxnoquotes)
-          .map(function(quote){
-            // Remove unnecessary imdb lf's
-            return quote.replace(/\n\s\s/g, ' ');
-          })
-    });
+      quotes = chunk.replace(/.+(\n){1}/, '')
+        .trim()
+        .split('\n\n')
+        .filter(function(quote){
+          return quote.length < config.maxquotelength;
+        })
+        .sort(function (a, b) {
+          if (a.length > b.length) return 1;
+          if (a.length < b.length) return -1;
+          return 0;
+        })
+        .slice(0, config.maxnoquotes)
+        .map(function(quote){
+          // Remove unnecessary imdb lf's
+          return quote.replace(/\n\s\s/g, ' ');
+        });
+      if (quotes.length !== 0) {
+        result.push({
+          title: chunk.split('\n', 1)[0],
+          quotes: quotes
+        });
+      }
     }
   });
 
@@ -99,18 +103,23 @@ ratings.on('end', function(){
     async.mapSeries(result, function(item, callback){
       getImages(item.title, function(tmdbdata){
         setTimeout(function() {
-          callback(null, {
-            title: item.title,
-            tmdbid: tmdbdata.id,
-            backdrop_path: tmdbdata.backdrop_path,
-            poster_path: tmdbdata.poster_path,
-            quotes: item.quotes,
-          });
+          if (tmdbdata.id) {
+            callback(null, { 
+              title: item.title,
+              tmdbid: tmdbdata.id,
+              backdrop_path: tmdbdata.backdrop_path,
+              poster_path: tmdbdata.poster_path,
+              quotes: item.quotes
+            })
+          }
+          else {
+            callback(null)
+          }
         }, config.delay);
       });
     }, function(err, result){
       result = result.filter(function(movie){
-      return movie.quotes.length !== 0 && movie.backdrop_path !== '';
+        return movie !== undefined;
       });
       var nquotes = result.reduce(function(prev, curr){
         return prev + curr.quotes.length;
@@ -147,7 +156,7 @@ var getImages = function(title, fn){
       })
     }
     else {
-      console.log(colors.inverse('\'' + title + '\' not found at TMDb'));
+      console.log(colors.inverse('\'' + title[0] + '\' not found at TMDb'));
       fn('');
     }
   });
