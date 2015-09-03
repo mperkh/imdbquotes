@@ -1,0 +1,48 @@
+#content {
+  color: white;
+}
+
+#about {
+  float: right;
+}
+
+.result {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#title {
+	margin-top: 30px;
+	font-style: italic;
+}
+
+#title a {
+	color: white;
+}
+
+#title a:hover {
+	color: yellow;
+}
+
+.result strong {
+	color: #999;
+}
+
+#alignbottom {
+	position: fixed;
+	bottom: 10px;
+	width: 100%;
+}
+
+.vegas-overlay {
+  opacity: .3 !important;
+}
+
+.ui .button {
+	border-radius: 0;
+}
+
+.description img {
+  padding: 10px;
+}

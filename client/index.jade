@@ -1,0 +1,49 @@
+html
+  head
+    script(src='http://oss.maxcdn.com/jquery/2.1.4/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/vegas/2.1.3/vegas.min.js')
+    script(src='http://oss.maxcdn.com/semantic-ui/2.1.2/semantic.min.js')
+    script(type='text/javascript', src='script.js')
+    link(rel='stylesheet', type='text/css', class="ui", href='http://oss.maxcdn.com/semantic-ui/2.1.2/semantic.min.css')
+    link(rel='stylesheet', type='text/css', href='https://cdnjs.cloudflare.com/ajax/libs/vegas/2.1.3/vegas.min.css')
+    link(rel='stylesheet', type='text/css', href='styles.css')
+  body
+    #alignbottom
+      .ui.centered.padded.grid
+        .bottom.aligned.streched.row
+          .two.wide.column
+            .poster
+          .eight.wide.column#content
+            .result
+            .controls
+              button.ui.twitter.button#tweet
+                i.twitter.icon
+                |   Tweet Quote
+              button.ui.black.button#nq Next quote
+              button.ui.black.button#about About
+    .ui.modal
+      .header
+        img(src='https://raw.githubusercontent.com/FreeCodeCamp/FCCAssets/master/Logos%20and%20Covers/fcc-app-icon.png', width='20px')
+        |   Freecode Camp - Zipline: Build a Random Quote Machine
+      .content
+        | This is my solution for Free Code Camp's Zipline '<a href="http://www.freecodecamp.com/challenges/zipline-build-a-random-quote-machine" target="_blank">Build a Random Quote Machine</a>'.
+        | It displays quotes from the <a href="http://www.imdb.com/chart/top" target="_blank">top 250 IMDb movies</a> and 
+        | presents them in combination with images from <a href="https://www.themoviedb.org/" target="_blank">TMDb</a>.<br>
+        | Content is generated using a <a href="https://github.com/mperkh/imdbquotes" target="_blank">script</a> specially written for this challange.<br>
+        | Written by mperkh.
+        .ui.divided.items
+          .item
+            .ui.tiny.image
+              img(src="http://ia.media-imdb.com/images/M/MV5BMjAzOTcxMDA2Nl5BMl5BcG5nXkFtZTcwMTc1MzIzOA@@._V1_.png", width="100px")
+            .middle.aligned.content
+              | Information courtesy of<br>
+              | IMDb<br>
+              | (http://www.imdb.com).<br>
+              | Used with permission.<br>
+          .item
+            .ui.tiny.image
+              img(src="https://d3a8mw37cqal2z.cloudfront.net/images/logos/var_7_0_tmdb-logo-2_Antitled.png", width="100px")
+            .middle.aligned.content
+              | This product uses the TMDb API but is not endorsed or certified by TMDb.
+      .actions
+        .ui.positive.button Close
